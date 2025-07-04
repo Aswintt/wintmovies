@@ -26,9 +26,9 @@ const Toprated = () => {
   useEffect(() => {
     fetchAllMovies();
   }, [page]);
-  if (!allmovies || allmovies.success === false) {
-    return <NotFound text="Toprated movies not found." />;
-  }
+  // if (!allmovies || allmovies.success === false) {
+  //   return <NotFound text="Toprated movies not found." />;
+  // }
   return (
     <>
       <h3 className="text-2xl md:text-3xl font-extrabold text-yellow-400 tracking-wide uppercase border-b border-yellow-400 inline-block">

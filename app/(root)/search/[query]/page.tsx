@@ -33,9 +33,9 @@ const searchMoive = () => {
     fetchAllMovies();
   }, [page, query]);
 
-  if (!allmovies || allmovies.success === false) {
-    return <NotFound text="Search movies not found." />;
-  }
+  // if (!allmovies || allmovies.success === false) {
+  //   return <NotFound text="Search movies not found." />;
+  // }
   return (
     <>
       <h3 className="text-2xl md:text-3xl text-yellow-400 tracking-wide uppercase border-b border-yellow-400 inline-block">

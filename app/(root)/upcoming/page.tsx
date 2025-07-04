@@ -27,9 +27,9 @@ const Upcoming = () => {
     fetchAllMovies();
   }, [page]);
 
-  if (!allmovies || allmovies.success === false) {
-    return <NotFound text="Upcoming movies not found." />;
-  }
+  // if (!allmovies || allmovies.success === false) {
+  //   return <NotFound text="Upcoming movies not found." />;
+  // }
 
   return (
     <>
