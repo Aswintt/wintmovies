@@ -1,40 +1,46 @@
 "use client";
 import MovieCard from "@/app/components/MovieCard";
-import NotFound from "@/app/components/NotFound";
-import Pagination from "@/app/components/Pagination";
 import SUIMovieCard from "@/app/components/ShimmerUi/SUIMovieCard";
 import React, { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import Pagination from "@/app/components/Pagination";
+import NotFound from "@/app/components/NotFound";
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
-const Toprated = () => {
+const searchMoive = () => {
+  const params = useParams();
+  const rawQuery = params.query;
+  const query =
+    typeof rawQuery === "string" ? decodeURIComponent(rawQuery) : "";
+
+  // console.log(query);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [allmovies, setAllMoives] = useState<any | null>(null);
-
   const fetchAllMovies = async () => {
     // console.log(page);
-    const TOPRATED = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&page=${page}`;
+    const SEARCH = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=${page}`;
     try {
-      const res = await fetch(TOPRATED);
+      const res = await fetch(SEARCH);
       const data = await res.json();
       setAllMoives(data?.results);
       setTotalPages(data?.total_pages);
     } catch (error) {
-      console.error("Error in Toprated", error);
+      console.error("Error in search", error);
     }
   };
   useEffect(() => {
     fetchAllMovies();
-  }, [page]);
+  }, [page, query]);
+
   if (!allmovies || allmovies.success === false) {
-    return <NotFound text="Toprated movies not found." />;
+    return <NotFound text="Search movies not found." />;
   }
   return (
     <>
-      <h3 className="text-2xl md:text-3xl font-extrabold text-yellow-400 tracking-wide uppercase border-b border-yellow-400 inline-block">
-        Top Rated
+      <h3 className="text-2xl md:text-3xl text-yellow-400 tracking-wide uppercase border-b border-yellow-400 inline-block">
+        Showing search results for {decodeURIComponent(query)}
       </h3>
-
       <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
         {!allmovies ? (
@@ -61,4 +67,4 @@ const Toprated = () => {
   );
 };
 
-export default Toprated;
+export default searchMoive;

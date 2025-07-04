@@ -20,7 +20,7 @@ const Header = () => {
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (search.trim()) {
-      router.push(`/search?query=${encodeURIComponent(search.trim())}`);
+      router.push(`/search/${encodeURIComponent(search.trim())}`);
       setSearch("");
       setMenuOpen(false);
     }
@@ -31,7 +31,10 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo and Hamburger */}
         <div className="flex items-center w-full justify-between md:w-auto">
-          <Link href="/" className="text-2xl font-extrabold text-yellow-400">
+          <Link
+            href="/"
+            className="text-2xl font-extrabold tracking-wide uppercase text-yellow-400"
+          >
             WintMovies
           </Link>
 

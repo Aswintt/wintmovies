@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "WintMovies",
+  title: "WINTMOVIES",
   description: "Created by Aswin. with create next app",
 };
 
